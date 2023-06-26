@@ -15,6 +15,7 @@ import { authReducer } from '../services/authSlice';
 import { productsReducer } from '../services/productSlice';
 import { diaryReducer } from '../services/diaryProductSlice';
 import { themeReducer } from '../services/themeSlice';
+import { axiosInterceptor } from '../services/axiosInterceptor';
 
 const persistAuthConfig = {
   key: 'auth',
@@ -39,6 +40,8 @@ export const store = configureStore({
       },
     }),
 });
+
+axiosInterceptor(store);
 
 export const persistor = persistStore(store);
 
