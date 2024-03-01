@@ -48,6 +48,12 @@ const authSlice = createSlice({
     [login.pending](state) {
       state.isRefreshing = true;
     },
+    [register.rejected](state) {
+      state.isRefreshing = false;
+    },
+    [login.pending](state) {
+      state.isRefreshing = true;
+    },
     [login.fulfilled](state, action) {
       const { email, name, ...userParams } = action.payload.data.user;
       state.user = { email, name };
@@ -61,6 +67,9 @@ const authSlice = createSlice({
     },
     [logout.pending](state) {
       state.isRefreshing = true;
+    },
+    [login.rejected](state) {
+      state.isRefreshing = false;
     },
     [logout.fulfilled](state, _) {
       state.user = initialState.user;
