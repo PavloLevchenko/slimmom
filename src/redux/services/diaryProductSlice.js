@@ -16,6 +16,15 @@ const diaryProductSlice = createSlice({
     day: new Date().toISOString(),
   },
   extraReducers: {
+    [getAllDiaryProduct.pending](state) {
+      state.isLoading = true;
+    },
+    [addDiaryProduct.pending](state) {
+      state.isLoading = true;
+    },
+    [deleteDiaryProduct.pending](state) {
+      state.isLoading = true;
+    },
     [getAllDiaryProduct.fulfilled](state, action) {
       state.notes = action.payload;
     },
@@ -27,6 +36,15 @@ const diaryProductSlice = createSlice({
         return id === action.meta.arg;
       });
       state.notes.splice(index, 1);
+    },
+    [getAllDiaryProduct.pending](state) {
+      state.isLoading = false;
+    },
+    [addDiaryProduct.pending](state) {
+      state.isLoading = false;
+    },
+    [deleteDiaryProduct.pending](state) {
+      state.isLoading = false;
     },
 
     [getNameProducts.fulfilled](state, action) {
