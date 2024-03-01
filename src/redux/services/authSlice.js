@@ -31,12 +31,22 @@ const authSlice = createSlice({
     [setUserParams]: (state, action) => {
       state.userParams = action.payload;
     },
+    [register.pending](state) {
+      state.isRefreshing = true;
+    },
     [register.fulfilled](state, action) {
       const { email, name, ...userParams } = action.payload.data.user;
       state.user = { email, name };
       state.userParams = userParams;
       state.token = action.payload.data.refreshToken;
       state.isLoggedIn = true;
+      state.isRefreshing = false;
+    },
+    [register.rejected](state) {
+      state.isRefreshing = false;
+    },
+    [login.pending](state) {
+      state.isRefreshing = true;
     },
     [login.fulfilled](state, action) {
       const { email, name, ...userParams } = action.payload.data.user;
@@ -44,12 +54,23 @@ const authSlice = createSlice({
       state.userParams = userParams;
       state.token = action.payload.data.refreshToken;
       state.isLoggedIn = true;
+      state.isRefreshing = false;
+    },
+    [login.rejected](state) {
+      state.isRefreshing = false;
+    },
+    [logout.pending](state) {
+      state.isRefreshing = true;
     },
     [logout.fulfilled](state, _) {
       state.user = initialState.user;
       state.userParams = initialState.userParams;
       state.token = null;
       state.isLoggedIn = false;
+      state.isRefreshing = false;
+    },
+    [logout.rejected](state) {
+      state.isRefreshing = false;
     },
     [refreshUser.pending](state) {
       state.isRefreshing = true;
