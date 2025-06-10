@@ -5,31 +5,30 @@ import { useCalculator } from 'hooks/useCalculator';
 
 export const SummaryList = () => {
   const { dailyNorm, consumed, left, percent } = useCalculator();
-
   const { t } = useTranslation();
   return (
     <List component="ol" padding="0px">
       <SummaryListItem disablePadding>
         <Typography>{t('Left')}</Typography>
         <Typography>
-          {left || '000'} {t('kcal')}
+          {left || '0'} {t('kcal')}
         </Typography>
       </SummaryListItem>
       <SummaryListItem disablePadding>
         <Typography noWrap>{t('Consumed')}</Typography>
         <Typography>
-          {consumed || '000'} {t('kcal')}
+          {consumed || '0'} {t('kcal')}
         </Typography>
       </SummaryListItem>
       <SummaryListItem disablePadding>
         <Typography>{t('Daily_rate')}</Typography>
         <Typography>
-          {dailyNorm || '000'} {t('kcal')}
+          {dailyNorm || '0'} {t('kcal')}
         </Typography>
       </SummaryListItem>
       <SummaryListItem disablePadding>
         <Typography>{t('n_of_normal')}</Typography>
-        <Typography>{percent || '000'} %</Typography>
+        <Typography>{percent || '0'} %</Typography>
       </SummaryListItem>
     </List>
   );

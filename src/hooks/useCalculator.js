@@ -4,9 +4,10 @@ import { getAllDiaryProduct, selectUserParams } from 'redux/services/selectors';
 import { calculateCalories } from 'utils';
 
 export const useCalculator = () => {
-  const [consumed, setConsumed] = useState(0);
+  const [consumed, setConsumed] = useState();
   const notes = useSelector(getAllDiaryProduct);
   const user = useSelector(selectUserParams);
+
   useEffect(() => {
     if (notes.length) {
       const total = notes.reduce((total, note) => {
@@ -15,11 +16,13 @@ export const useCalculator = () => {
         );
       }, 0);
       setConsumed(Math.round(total));
+    } else {
+      setConsumed(0);
     }
   }, [notes]);
 
   const dailyNorm = calculateCalories(user);
   const left = dailyNorm - consumed;
   const percent = Math.round((consumed / dailyNorm) * 100);
-  return dailyNorm ? { dailyNorm, consumed, left, percent } : {};
+  return { dailyNorm, consumed, left, percent };
 };

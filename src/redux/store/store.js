@@ -11,6 +11,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import i18n from '../../translations/i18n';
 import { authReducer } from '../services/authSlice';
 import { productsReducer } from '../services/productSlice';
 import { diaryReducer } from '../services/diaryProductSlice';
@@ -37,6 +38,9 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+      thunk: {
+        extraArgument: { i18n },
       },
     }),
 });

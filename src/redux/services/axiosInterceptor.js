@@ -3,7 +3,6 @@ import axios from 'axios';
 export const axiosInterceptor = store => {
   const handleError = async error => {
     const status = error.response ? error.response.status : null;
-
     const originalRequest = error.config;
 
     if (status === 401 && !originalRequest._retry) {
@@ -30,7 +29,9 @@ export const axiosInterceptor = store => {
 
     if (
       persistedToken === null &&
-      !['login', 'registration'].some(element => config.url.includes(element))
+      !['login', 'registration', 'products'].some(element =>
+        config.url.includes(element)
+      )
     ) {
       return store.rejectWithValue('Unable to access');
     }

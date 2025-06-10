@@ -42,7 +42,12 @@ const Burger = () => {
             className="fi fi-gb"
           ></LangButton>
           <LangButton
-            value="ua"
+            value="de"
+            onClick={handleOnclick}
+            className="fi fi-de"
+          ></LangButton>
+          <LangButton
+            value="uk"
             onClick={handleOnclick}
             className="fi fi-ua"
           ></LangButton>

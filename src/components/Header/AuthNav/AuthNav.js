@@ -23,6 +23,11 @@ const AuthNav = () => {
           className="fi fi-gb"
         ></LangButton>
         <LangButton
+          value="de"
+          onClick={handleOnclick}
+          className="fi fi-de"
+        ></LangButton>
+        <LangButton
           value="ua"
           onClick={handleOnclick}
           className="fi fi-ua"

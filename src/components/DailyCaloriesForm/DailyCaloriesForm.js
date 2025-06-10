@@ -78,6 +78,7 @@ export const DailyCaloriesForm = ({ isModal = false }) => {
       : measure;
   };
   const { t } = useTranslation();
+
   return (
     <FormWrapper>
       <Title>{t('Register_calculator')}</Title>
