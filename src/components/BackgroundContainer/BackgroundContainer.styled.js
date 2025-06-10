@@ -29,7 +29,6 @@ export const StrawberryImg = styled.img`
     bottom: 45px;
     right: 0px;
   }
-  z-index: -1;
 `;
 
 export const StrawberryAuthImg = styled.img`
@@ -48,7 +47,6 @@ export const StrawberryAuthImg = styled.img`
     bottom: 45px;
     right: 0px;
   }
-  z-index: -1;
 `;
 
 export const BananaImg = styled.img`
@@ -99,7 +97,6 @@ export const LeafsAuthImg = styled.img`
     top: 0;
     right: 195px;
   }
-  z-index: -1;
 `;
 
 export const VectorImg = styled.img`
@@ -117,5 +114,4 @@ export const VectorImg = styled.img`
     bottom: 0px;
     right: 0px;
   }
-  z-index: -1;
 `;

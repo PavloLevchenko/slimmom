@@ -45,7 +45,7 @@ export const getAllGroupDiaryProduct = state => {
 };
 export const getAllDiaryProduct = state => state.diary.notes;
 export const getProductTitle = state => state.diary.selectTitle;
-export const getIsLoading = state => state.diary.IsLoading;
+export const getIsLoading = state => state.diary.IsLoading || state.products.loading;
 export const getDiaryDay = state => state.diary.day;
 
 export const selectBadCategories = state => state.products.categories;

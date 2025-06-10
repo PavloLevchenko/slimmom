@@ -4,12 +4,17 @@ import * as Yup from 'yup';
 import { PropTypes } from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { AddProductBtn } from 'components/Button/Button';
+import Loader from '../../Loader';
 import { Form, ProductInput, GramsInput, Complete } from './AddForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDiaryProduct, getNameProducts } from 'redux/services/operations';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { getProductTitle, selectUserParams } from 'redux/services/selectors';
+import {
+  getProductTitle,
+  selectUserParams,
+  getIsLoading,
+} from 'redux/services/selectors';
 
 const AddForm = ({ onModal }) => {
   const dispatch = useDispatch();
@@ -19,6 +24,9 @@ const AddForm = ({ onModal }) => {
 
   const dataTitle = useSelector(getProductTitle);
   const userParams = useSelector(selectUserParams);
+  const isLoading = useSelector(getIsLoading);
+
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: { weight: '' },
@@ -27,11 +35,11 @@ const AddForm = ({ onModal }) => {
     }),
     onSubmit: ({ weight }, { resetForm }) => {
       if (productName === null) {
-        toast.info('You need add product');
+        toast.info(t('Enter_product_name'));
         return;
       }
       if (weight === '') {
-        toast.info('You need add weight');
+        toast.info(t('Enter_product_weight'));
         return;
       }
       const data = {
@@ -74,7 +82,6 @@ const AddForm = ({ onModal }) => {
   });
   const { values, errors, touched, handleSubmit } = formik;
 
-  const { t } = useTranslation();
   return (
     <Form onSubmit={handleSubmit}>
       <Complete
@@ -92,7 +99,7 @@ const AddForm = ({ onModal }) => {
             </span>
           </li>
         )}
-        noOptionsText="Enter product name"
+        noOptionsText={t('Enter_product_name')}
         options={nameProd}
         renderInput={params => (
           <ProductInput
@@ -116,9 +123,13 @@ const AddForm = ({ onModal }) => {
         value={values.weight}
         error={Boolean(touched.weight && errors.weight)}
       />
-      <AddProductBtn type="submit" aria-label="Add product">
-        <HiPlus />
-      </AddProductBtn>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <AddProductBtn type="submit" aria-label="Add product">
+          <HiPlus />
+        </AddProductBtn>
+      )}
     </Form>
   );
 };

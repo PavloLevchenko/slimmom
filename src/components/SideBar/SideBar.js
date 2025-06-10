@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Box } from '@mui/material';
+import Loader from '../Loader';
 import {
   SideBarContainer,
   BadFoodContainer,
@@ -8,12 +9,17 @@ import {
 import { SummaryList } from './SummaryList';
 import { useTranslation } from 'react-i18next';
 import { CategoriesList } from 'components/DailyCalorieIntake/categoriesList';
-import { getDiaryDay } from 'redux/services/selectors';
+import { getDiaryDay, getIsLoading } from 'redux/services/selectors';
 
 export const SideBar = () => {
   const { t } = useTranslation();
   const day = useSelector(getDiaryDay);
-  return (
+
+  const isLoading = useSelector(getIsLoading);
+
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <SideBarContainer>
         <Box sx={{ maxWidth: 450 }}>

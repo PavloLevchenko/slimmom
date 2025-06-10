@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 import logo from '../../../images/logo/logo.png';
 import logoDesk from '../../../images/logo/logoDesk.png';
-import slim from '../../../images/logo/logoSlim.png';
-import mom from '../../../images/logo/logoMom.png';
+import { ReactComponent as slim } from '../../../images/logo/logoSlim.svg';
+import { ReactComponent as mom } from '../../../images/logo/logoMom.svg';
 import { zoomIn } from 'react-animations';
 
 const zoomAnimation = keyframes`${zoomIn}`;
@@ -48,22 +48,15 @@ export const NavHeader = styled.nav`
 
 export const Wrapper = styled.div`
   display: flex;
-
-  @media screen and (max-width: 767.5px) {
-    display: none;
-  }
-
+  align-items: center;
+  margin-right: ${prop => prop.theme.space[5]}px;
+  margin-bottom: ${prop => prop.theme.space[3]}px;
   @media screen and (min-width: 1280px) {
-    position: absolute;
-    bottom: 0;
     left: ${prop => prop.theme.spaceForm[3]}px;
-
     ::after {
       content: '';
       display: block;
-      position: absolute;
-      top: -5px;
-      left: 130px;
+      margin-left: ${prop => prop.theme.space[5]}px;
       height: ${prop => prop.theme.space[5]}px;
       width: ${prop => prop.theme.space[1]}px;
       background-color: ${prop => prop.theme.palette.input.primary};
@@ -71,38 +64,14 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const LoggedWrapper = styled.div`
-  display: flex;
-
-  @media screen and (max-width: 767.5px) {
-    display: none;
-  }
-
-  @media screen and (min-width: 1280px) {
-    position: absolute;
-    bottom: 0;
-    left: ${prop => prop.theme.spaceForm[3]}px;
-
-    ::after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: -5px;
-      left: 130px;
-      height: ${prop => prop.theme.space[5]}px;
-      width: ${prop => prop.theme.space[1]}px;
-      background-color: ${prop => prop.theme.palette.input.primary};
-    }
-  }
-`;
+export const LoggedWrapper = styled(Wrapper)``;
 
 export const LogoLink = styled(NavLink)`
   display: flex;
-  align-items: center;
+  align-items: baseline;
 
   @media only screen and (min-width: 1280px) {
-    position: relative;
-    margin-right: 130px;
+    margin-right: ${prop => prop.theme.space[3]}px;
   }
 `;
 
@@ -118,7 +87,6 @@ export const Logo = styled.div`
   animation: 3s ${zoomAnimation};
   width: 46.67px;
   height: 44px;
-  margin-right: 10px;
   background-image: url(${logo});
   background-size: cover;
 
@@ -129,19 +97,16 @@ export const Logo = styled.div`
   }
 `;
 
-export const LogoSlim = styled.span`
-  width: 48px;
-  height: ${prop => prop.theme.space[4]}px;
-  margin-right: 6px;
-  background-image: url(${slim});
-  background-size: cover;
+export const LogoSlim = styled(slim)`
+  margin-top: 10px;
+  fill: ${prop => prop.theme.palette.text.primary};
+  @media screen and (min-width: 1280px) {
+    filter: drop-shadow(0 5px 1px ${prop => prop.theme.palette.text.secondary});
+  }
 `;
 
-export const LogoMom = styled.span`
-  width: 52.2px;
-  height: 15.4px;
-  background-image: url(${mom});
-  background-size: cover;
+export const LogoMom = styled(mom)`
+  fill: #fc842d;
 `;
 
 export const UserMenuWrapperDesk = styled.div`

@@ -47,8 +47,6 @@ export const LangButton = styled.button`
 export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
-  align-self: baseline;
-  padding-top: 8px;
   margin-right: 10px;
 
   @media screen and (max-width: 767.5px) {
