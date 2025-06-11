@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Modal } from '@mui/material';
 import { bool } from 'prop-types';
 import { useFormik } from 'formik';
@@ -26,6 +27,7 @@ import DailyCalorieIntake from 'components/DailyCalorieIntake/dailyCalorieIntake
 import { useTranslation } from 'react-i18next';
 
 export const DailyCaloriesForm = ({ isModal = false }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const loading = useSelector(selectLoadStatus);
   const user = useSelector(selectUserParams);
@@ -47,6 +49,9 @@ export const DailyCaloriesForm = ({ isModal = false }) => {
       setParams(data);
       dispatch(setUserParams(data));
       isModal ? setOpen(true) : data && dispatch(getProductsCategories(data));
+      if (!isModal) {
+        navigate('/diary');
+      }
     },
   });
 

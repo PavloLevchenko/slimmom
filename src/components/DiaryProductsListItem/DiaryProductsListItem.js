@@ -26,17 +26,18 @@ export default function DiaryProductsListItem() {
   const notes = useSelector(getAllDiaryProduct);
   const notesGroup = useSelector(getAllGroupDiaryProduct);
   const [open, setOpen] = useState(false);
+  const [idProduct, setIdProduct] = useState();
   const [group, setGrouped] = useState(false);
   const dailyProducts = group ? notesGroup : notes;
 
   const handleClose = () => {
     setOpen(false);
   };
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const handleToggle = id => {
     setOpen(!open);
-    localStorage.setItem('id', `${id}`);
+    setIdProduct(id);
   };
 
   return (
@@ -56,7 +57,7 @@ export default function DiaryProductsListItem() {
         {dailyProducts.map((e, i, ar) => {
           return (
             <ListItems key={e._id}>
-              <NameProduct noWrap>{e.product.title.ua}</NameProduct>
+              <NameProduct noWrap>{e.product.title[i18n.language]}</NameProduct>
               <DataProduct>
                 <Weight noWrap>
                   {e.weight} {t('g')}
@@ -72,7 +73,7 @@ export default function DiaryProductsListItem() {
                 <DeleteButton
                   type="button"
                   onClick={() => {
-                    handleToggle(e.id);
+                    handleToggle(e._id);
                   }}
                 >
                   <IconCross />
@@ -86,7 +87,7 @@ export default function DiaryProductsListItem() {
           open={open}
           onClick={handleClose}
         >
-          <DiaryModalList />
+          <DiaryModalList id={idProduct} />
         </Backdrop>
       </List>
     </Box>

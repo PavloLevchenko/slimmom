@@ -17,6 +17,9 @@ const resources = {
   uk: {
     translation: TRANSLATIONS_UA,
   },
+  ua: {
+    translation: TRANSLATIONS_UA,
+  },
 };
 
 i18n

@@ -8,7 +8,7 @@ import Loader from '../../Loader';
 import { Form, ProductInput, GramsInput, Complete } from './AddForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDiaryProduct, getNameProducts } from 'redux/services/operations';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
   getProductTitle,
@@ -20,13 +20,14 @@ const AddForm = ({ onModal }) => {
   const dispatch = useDispatch();
   const date = new Date().toISOString();
   const [productName, setProductName] = useState(null);
+  const [productNames, setProductNames] = useState([]);
   const [product, setProduct] = useState('');
 
   const dataTitle = useSelector(getProductTitle);
   const userParams = useSelector(selectUserParams);
   const isLoading = useSelector(getIsLoading);
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const formik = useFormik({
     initialValues: { weight: '' },
@@ -53,6 +54,7 @@ const AddForm = ({ onModal }) => {
       resetForm();
       setProduct(' ');
       setProductName(null);
+      setProductNames([]);
       onModal && onModal();
     },
   });
@@ -63,23 +65,32 @@ const AddForm = ({ onModal }) => {
     if (v.length === 0) {
       setProductName(null);
       setProduct('');
+      setProductNames([]);
     }
   };
   const handleChange = (e, value) => {
     setProduct(value.id);
     setProductName(value.label);
   };
-  const nameProd = dataTitle.map(e => {
-    const bloodTypes = e.groupBloodNotAllowed.flatMap((type, i) =>
-      type === true ? i : []
+
+  useEffect(() => {
+    setProductNames(
+      dataTitle.map(e => {
+        const bloodTypes = e.groupBloodNotAllowed.flatMap((type, i) =>
+          type === true ? i : []
+        );
+        const badProduct = bloodTypes.includes(userParams.bloodType);
+        return {
+          label: e.title[i18n.language],
+          id: e._id,
+          color: badProduct
+            ? 'rgba(200, 0, 0, 0.1)'
+            : 'rgba(224, 224, 224, 0.1)',
+        };
+      })
     );
-    const badProduct = bloodTypes.includes(userParams.bloodType);
-    return {
-      label: e.title.ua,
-      id: e._id,
-      color: badProduct ? 'rgba(200, 0, 0, 0.1)' : 'rgba(224, 224, 224, 0.1)',
-    };
-  });
+  }, [dataTitle, i18n.language, userParams.bloodType]);
+
   const { values, errors, touched, handleSubmit } = formik;
 
   return (
@@ -100,7 +111,7 @@ const AddForm = ({ onModal }) => {
           </li>
         )}
         noOptionsText={t('Enter_product_name')}
-        options={nameProd}
+        options={productNames}
         renderInput={params => (
           <ProductInput
             {...params}

@@ -48,14 +48,20 @@ export const TRANSLATIONS_DE = {
   Not_found_product: 'Entschuldigung, Produkt nicht gefunden!',
   yes: 'Ja',
   no: 'Nein',
-  Sorry_something_went_wrong: 'Entschuldigung, etwas ist schief gelaufen! Bitte versuchen Sie es später erneut.',
+  Sorry_something_went_wrong:
+    'Entschuldigung, etwas ist schief gelaufen! Bitte versuchen Sie es später erneut.',
   Product_added_successfully: 'Produkt erfolgreich hinzugefügt!',
   Get_daily_products_error: 'Fehler beim Abrufen der täglichen Produkte',
   Get_products_error: 'Fehler beim Abrufen der Produkte',
   Get_categories_products_error: 'Fehler beim Abrufen der Produktkategorien',
-  Add_product_in_diary_error: 'Fehler beim Hinzufügen des Produkts zum Tagebuch',
-  Delete_product_from_diary_error: 'Fehler beim Löschen des Produkts aus dem Tagebuch',
+  Add_product_in_diary_error:
+    'Fehler beim Hinzufügen des Produkts zum Tagebuch',
+  Delete_product_from_diary_success:
+    'Produkt erfolgreich aus dem Tagebuch gelöscht',
+  Delete_product_from_diary_error:
+    'Fehler beim Löschen des Produkts aus dem Tagebuch',
   Refresh_user_error: 'Fehler beim Aktualisieren der Benutzerdaten',
   Logout_user_error: 'Fehler beim Abmelden',
   Delete_product: 'Möchten Sie dieses Produkt wirklich löschen?',
+  Parameters_calculated: 'Parameter berechnet',
 };

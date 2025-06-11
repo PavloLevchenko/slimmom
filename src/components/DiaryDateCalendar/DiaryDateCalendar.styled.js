@@ -3,7 +3,7 @@ import { TextField } from '@mui/material';
 
 export const DiaryDate = styled.div`
   margin: 40px auto 32px auto;
-  width: 155px;
+  width: 160px;
   font-family: Verdana;
   font-style: normal;
   font-weight: 700;

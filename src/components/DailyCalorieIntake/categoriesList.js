@@ -15,7 +15,7 @@ export const CategoriesList = ({ onMain = true }) => {
   const userParams = useSelector(selectUserParams);
   const categories = useSelector(selectBadCategories);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (!categories.length && userParams && userParams.age !== 0) {
@@ -31,9 +31,9 @@ export const CategoriesList = ({ onMain = true }) => {
       {categories.map((item, index) => {
         return (
           <CustomizedList
-            key={item}
+            key={item[i18n.language]}
             number={index + 1}
-            category={item}
+            category={item[i18n.language]}
             withNumbers={onMain}
           />
         );

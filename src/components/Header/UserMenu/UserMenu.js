@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { getUserName } from 'redux/services/selectors';
 import { useDispatch } from 'react-redux';
 import { logout } from 'redux/services/operations';
+import { useAuth } from 'hooks/useAuth';
 import {
   List,
   ListItem,
@@ -17,6 +18,7 @@ import { useTranslation } from 'react-i18next';
 const UserMenu = () => {
   const dispatch = useDispatch();
   const name = useSelector(getUserName);
+  const { userHasData } = useAuth();
 
   const onLogout = () => {
     dispatch(logout());
@@ -24,12 +26,12 @@ const UserMenu = () => {
   const { t } = useTranslation();
   return (
     <>
-      <List>
-        <>
+      {!userHasData && (
+        <List>
           <ListItem to="/diary">{t('Diary')}</ListItem>
           <ListItem to="/calculator">{t('Calculator_button')}</ListItem>
-        </>
-      </List>
+        </List>
+      )}
       <LinkToCalc to="/calculator">
         <Arrow color="black" size="20px" />
       </LinkToCalc>
