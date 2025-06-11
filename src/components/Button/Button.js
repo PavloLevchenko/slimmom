@@ -61,7 +61,6 @@ export const LinkButton = styled(NavLink)`
   text-decoration: none;
   color: inherit;
   &:hover {
-    background-color: inherit;
     color: inherit;
   }
 `;

@@ -1,4 +1,4 @@
-import { lazy, useEffect } from 'react';
+import { lazy, useEffect, useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { HelmetProvider } from 'react-helmet-async';
 import { GlobalStyle } from './GlobalStyle';
@@ -25,11 +25,20 @@ const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  const { isRefreshing } = useAuth();
+  const [redirectPage, setRedirectPage] = useState('/calculator');
+  const { isRefreshing, userHasData } = useAuth();
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!userHasData) {
+      setRedirectPage('/diary');
+    } else {
+      setRedirectPage('/calculator');
+    }
+  }, [isRefreshing, userHasData]);
 
   return isRefreshing ? (
     <Loader />
@@ -44,7 +53,7 @@ export const App = () => {
               <Route
                 index
                 element={
-                  <PublicRoute redirectTo="/diary" restricted>
+                  <PublicRoute redirectTo={redirectPage} restricted>
                     <MainPage />
                   </PublicRoute>
                 }
@@ -52,7 +61,7 @@ export const App = () => {
               <Route
                 path="signup"
                 element={
-                  <PublicRoute redirectTo="/diary" restricted>
+                  <PublicRoute redirectTo={redirectPage} restricted>
                     <RegistrationPage />
                   </PublicRoute>
                 }
@@ -60,7 +69,7 @@ export const App = () => {
               <Route
                 path="login"
                 element={
-                  <PublicRoute redirectTo="/diary" restricted>
+                  <PublicRoute redirectTo={redirectPage} restricted>
                     <LoginPage />
                   </PublicRoute>
                 }

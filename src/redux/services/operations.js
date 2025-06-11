@@ -142,6 +142,7 @@ export const deleteDiaryProduct = createAsyncThunk(
   async (id, { rejectWithValue, extra }) => {
     try {
       await axios.delete(`/api/diary/${id}`);
+      toast(extra.i18n.t('Delete_product_from_diary_success'));
       return id;
     } catch (error) {
       toast(extra.i18n.t('Delete_product_from_diary_error'));
@@ -186,7 +187,7 @@ export const getNameProducts = createAsyncThunk(
       const { data } = await axios.get(`/api/products`, {
         params: { title: userQuery },
       });
-      data.message && toast.success(data.message);
+      data.message && toast.success(i18n.t('Parameters_calculated'));
       if (data.products.length === 0) {
         toast.info(i18n.t('Not_found_product'));
       }

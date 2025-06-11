@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import ListItemButton from '@mui/material/ListItemButton';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { selectUserParams } from 'redux/services/selectors';
+import { useTranslation } from 'react-i18next';
 
 import List from '@mui/material/List';
 import ListItemText from '@mui/material/ListItemText';
@@ -21,14 +22,18 @@ export const CustomizedList = ({ number, category, withNumbers }) => {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(1);
 
+  const { i18n } = useTranslation();
+
   const getTitles = () => {
     axios
       .post(
-        `/api/products?category=${category}&currentPage=${page}&pageSize=25`,
+        `/api/products?category=${category}&currentLanguage=${i18n.language}&currentPage=${page}&pageSize=25`,
         user
       )
       .then(res => {
-        const titles = res.data.products.flatMap(prod => prod.title.ua);
+        const titles = res.data.products.flatMap(
+          prod => prod.title[i18n.language]
+        );
         setProducts(prev => [...prev, ...titles]);
       });
     setPage(prev => prev + 1);
@@ -38,11 +43,14 @@ export const CustomizedList = ({ number, category, withNumbers }) => {
     setOpen(!open);
     axios
       .post(
-        `/api/products?category=${category}&currentPage=${page}&pageSize=25`,
+        `/api/products?category=${category}&currentLanguage=${i18n.language}&currentPage=${page}&pageSize=25`,
         user
       )
       .then(res => {
-        const titles = res.data.products.flatMap(prod => prod.title.ua);
+        const titles = res.data.products.flatMap(
+          prod => prod.title[i18n.language]
+        );
+
         setProducts(prev => [...prev, ...titles]);
       });
     setPage(prev => prev + 1);
@@ -53,69 +61,71 @@ export const CustomizedList = ({ number, category, withNumbers }) => {
   };
 
   return (
-    <Box>
-      <List
-        sx={{ width: '100%', padding: 0 }}
-        component="nav"
-        aria-labelledby="nested-list-subheader"
-      >
-        <ListItemButton onClick={handleClick} sx={{ pl: 0 }}>
-          <ListItemText
-            primary={
-              (withNumbers ? number + '.  ' : '') +
-              category.charAt(0).toUpperCase() +
-              category.slice(1)
-            }
-            sx={{ my: 0, p: 0 }}
-          />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <div
-              id="scrollableDiv"
-              style={{
-                height: 300,
-                overflow: 'auto',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <InfiniteScroll
-                dataLength={products.length}
-                next={getTitles}
-                style={{ display: 'flex', flexDirection: 'column' }}
-                inverse={false} //
-                hasMore={true}
-                loader={
-                  <Box
-                    sx={{
-                      height: '150px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <CircularProgress color="info" />
-                  </Box>
-                }
-                scrollableTarget="scrollableDiv"
+    category && (
+      <Box>
+        <List
+          sx={{ width: '100%', padding: 0 }}
+          component="nav"
+          aria-labelledby="nested-list-subheader"
+        >
+          <ListItemButton onClick={handleClick} sx={{ pl: 0 }}>
+            <ListItemText
+              primary={
+                (withNumbers ? number + '.  ' : '') +
+                category.charAt(0).toUpperCase() +
+                category.slice(1)
+              }
+              sx={{ my: 0, p: 0 }}
+            />
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <div
+                id="scrollableDiv"
+                style={{
+                  height: 300,
+                  overflow: 'auto',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
               >
-                {products.map((item, index) => (
-                  <ListItemButton
-                    onClick={handleClose}
-                    key={index}
-                    sx={{ pl: 0 }}
-                  >
-                    <ListItemText primary={'-  ' + item} />
-                  </ListItemButton>
-                ))}
-              </InfiniteScroll>
-            </div>
-          </List>
-        </Collapse>
-      </List>
-    </Box>
+                <InfiniteScroll
+                  dataLength={products.length}
+                  next={getTitles}
+                  style={{ display: 'flex', flexDirection: 'column' }}
+                  inverse={false} //
+                  hasMore={true}
+                  loader={
+                    <Box
+                      sx={{
+                        height: '150px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CircularProgress color="info" />
+                    </Box>
+                  }
+                  scrollableTarget="scrollableDiv"
+                >
+                  {products.map((item, index) => (
+                    <ListItemButton
+                      onClick={handleClose}
+                      key={index}
+                      sx={{ pl: 0 }}
+                    >
+                      <ListItemText primary={'-  ' + item} />
+                    </ListItemButton>
+                  ))}
+                </InfiniteScroll>
+              </div>
+            </List>
+          </Collapse>
+        </List>
+      </Box>
+    )
   );
 };
 

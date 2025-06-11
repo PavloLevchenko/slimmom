@@ -55,7 +55,9 @@ export const TRANSLATIONS_UA = {
   Get_categories_products_error: 'Помилка отримання категорій продуктів',
   Add_product_in_diary_error: 'Помилка додавання продукту в щоденник',
   Delete_product_from_diary_error: 'Помилка видалення продукту з щоденника',
+  Delete_product_from_diary_success: 'Продукт успішно видалено з щоденника',
   Refresh_user_error: 'Помилка оновлення даних користувача',
   Logout_user_error: 'Помилка виходу',
   Delete_product: 'Ви дійсно бажаєте видалити цей продукт?',
+  Parameters_calculated: 'Параметри розраховані',
 };
