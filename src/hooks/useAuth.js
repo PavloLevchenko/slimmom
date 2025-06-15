@@ -1,15 +1,15 @@
 import { useSelector } from 'react-redux';
 import {
-  getUserData,
+  getGlobalUserData,
   getIsLoggedIn,
   selectIsRefreshing,
-} from 'redux/services/selectors';
+} from 'reduxState/services/selectors';
 
 export const useAuth = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
   const isRefreshing = useSelector(selectIsRefreshing);
-  const user = useSelector(getUserData);
-  const userHasData = Boolean(user && user.bloodType && user.weight);
+  const user = useSelector(getGlobalUserData);
+  const userHasData = Boolean(user && user.bloodType);
 
   return {
     isLoggedIn,

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import { setupListeners } from '@reduxjs/toolkit/query';
 import storage from 'redux-persist/lib/storage';
 import {
   persistStore,
@@ -21,7 +21,7 @@ import { axiosInterceptor } from '../services/axiosInterceptor';
 const persistAuthConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token', 'userParams'],
+  whitelist: ['token', 'userParams', 'cookieConsent'],
 };
 const persistThemeConfig = {
   key: 'theme',

@@ -16,8 +16,14 @@ export const ButtonModalDiary = styled(Button)`
   }
   &.MuiButton-contained:hover {
     background-color: ${prop => prop.theme.palette.background.paper};
-    color: ${prop => prop.theme.borders.accent};
+    color: ${prop => prop.theme.palette.text.contrast};
     border: 1px solid ${prop => prop.theme.palette.primary.main};
+    box-shadow: none;
+  }
+  &.MuiButton-outlined:hover {
+    background-color: ${prop => prop.theme.palette.primary.main};
+    color: ${prop => prop.theme.palette.common.white};
+    border: 1px solid ${prop => prop.theme.palette.common.white};
     box-shadow: none;
   }
   @media screen and (min-width: 768px) {

@@ -9,9 +9,9 @@ import {
   TitleWrapper,
   CloseButton,
   ButtonStart,
-} from './dailyCalorieIntake.styled';
+} from './DailyCalorieIntake.styled';
 import { calculateCalories } from 'utils';
-import { CategoriesList } from './categoriesList';
+import { CategoriesList } from './CategoriesList';
 
 import { useTranslation } from 'react-i18next';
 

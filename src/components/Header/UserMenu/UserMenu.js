@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import { getUserName } from 'redux/services/selectors';
+import { getUserName } from 'reduxState/services/selectors';
 import { useDispatch } from 'react-redux';
-import { logout } from 'redux/services/operations';
+import { logout } from 'reduxState/services/operations';
 import { useAuth } from 'hooks/useAuth';
 import {
   List,
@@ -26,7 +26,7 @@ const UserMenu = () => {
   const { t } = useTranslation();
   return (
     <>
-      {!userHasData && (
+      {userHasData && (
         <List>
           <ListItem to="/diary">{t('Diary')}</ListItem>
           <ListItem to="/calculator">{t('Calculator_button')}</ListItem>

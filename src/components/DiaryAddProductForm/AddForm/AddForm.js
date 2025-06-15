@@ -4,17 +4,19 @@ import * as Yup from 'yup';
 import { PropTypes } from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { AddProductBtn } from 'components/Button/Button';
-import Loader from '../../Loader';
 import { Form, ProductInput, GramsInput, Complete } from './AddForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDiaryProduct, getNameProducts } from 'redux/services/operations';
+import {
+  addDiaryProduct,
+  getNameProducts,
+} from 'reduxState/services/operations';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
   getProductTitle,
   selectUserParams,
   getIsLoading,
-} from 'redux/services/selectors';
+} from 'reduxState/services/selectors';
 
 const AddForm = ({ onModal }) => {
   const dispatch = useDispatch();
@@ -134,13 +136,13 @@ const AddForm = ({ onModal }) => {
         value={values.weight}
         error={Boolean(touched.weight && errors.weight)}
       />
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <AddProductBtn type="submit" aria-label="Add product">
-          <HiPlus />
-        </AddProductBtn>
-      )}
+      <AddProductBtn
+        disabled={isLoading}
+        type="submit"
+        aria-label="Add product"
+      >
+        <HiPlus />
+      </AddProductBtn>
     </Form>
   );
 };

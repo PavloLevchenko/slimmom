@@ -1,7 +1,7 @@
 import bananaDesk from '../../images/background/bananaDesk.png';
 import bananaTab from '../../images/background/bananaTab.png';
-import vectorDesk from '../../images/background/vectorDesk.png';
-import vectorTab from '../../images/background/vectorTab.png';
+import { ReactComponent as VectorDesk } from '../../images/background/vectorDesk.svg';
+import { ReactComponent as VectorTab } from '../../images/background/vectorTab.svg';
 import leafsDesk from '../../images/background/leafsDesk.png';
 import leafsTab from '../../images/background/leafsTab.png';
 import leafsTabForm from '../../images/background/leafsTabForm.png';
@@ -32,58 +32,48 @@ const BackgroundContainer = ({ children }) => {
   const banana = desktop ? bananaDesk : bananaTab;
   const strawberry = desktop ? strawberryDesk : strawberryTab;
   const leafs = desktop ? leafsDesk : leafsTab;
-  const vector = desktop ? vectorDesk : vectorTab;
+  const Vector = desktop ? VectorDesk : VectorTab;
   const strawberryAuth = desktop ? strawberryDesk : strawberryTabForm;
   const leafsAuth = desktop ? leafsDesk : leafsTabForm;
 
   return (
-    <>
-      <ImageContainer ref={ref} visible={isLoggedIn}>
-        {isMainPage ? (
-          <>
-            <VectorImg
-              src={vector}
-              alt="grey background"
-              visibleImg={!isLoggedIn}
-            />
+    <ImageContainer ref={ref} visible={isLoggedIn}>
+      {isMainPage ? (
+        <>
+          <VectorImg visibleImg={!isLoggedIn}>
+            <Vector alt="grey background" />
+          </VectorImg>
 
-            <BananaImg src={banana} alt="banana" visibleImg={!isLoggedIn} />
+          <BananaImg src={banana} alt="banana" visibleImg={!isLoggedIn} />
 
-            <StrawberryImg
-              src={strawberry}
-              alt="strawberry"
-              visibleImg={!isLoggedIn}
-            />
+          <StrawberryImg
+            src={strawberry}
+            alt="strawberry"
+            visibleImg={!isLoggedIn}
+          />
 
-            <LeafsImg src={leafs} alt="leafs" visibleImg={!isLoggedIn} />
-            {children}
-          </>
-        ) : (
-          <>
-            <VectorImg
-              src={vector}
-              alt="grey background"
-              visibleImg={!isLoggedIn}
-            />
+          <LeafsImg src={leafs} alt="leafs" visibleImg={!isLoggedIn} />
+          {children}
+        </>
+      ) : (
+        <>
+          <VectorImg visibleImg={!isLoggedIn}>
+            <Vector alt="grey background" />
+          </VectorImg>
 
-            <BananaImg src={banana} alt="banana" visibleImg={!isLoggedIn} />
+          <BananaImg src={banana} alt="banana" visibleImg={!isLoggedIn} />
 
-            <StrawberryAuthImg
-              src={strawberryAuth}
-              alt="strawberry"
-              visibleImg={!isLoggedIn}
-            />
+          <StrawberryAuthImg
+            src={strawberryAuth}
+            alt="strawberry"
+            visibleImg={!isLoggedIn}
+          />
 
-            <LeafsAuthImg
-              src={leafsAuth}
-              alt="leafs"
-              visibleImg={!isLoggedIn}
-            />
-            {children}
-          </>
-        )}
-      </ImageContainer>
-    </>
+          <LeafsAuthImg src={leafsAuth} alt="leafs" visibleImg={!isLoggedIn} />
+          {children}
+        </>
+      )}
+    </ImageContainer>
   );
 };
 

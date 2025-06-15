@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import Close from '../../images/icon/Close.svg';
-import Close_mobile from '../../images/icon/Close_mobile.svg';
+import Close from '../../images/icon/close.svg';
+import Close_mobile from '../../images/icon/close_mobile.svg';
 import { Button } from '@mui/material';
 
 export const IntakeBar = styled.div`

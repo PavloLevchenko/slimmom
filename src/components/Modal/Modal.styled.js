@@ -40,7 +40,7 @@ export const CloseButton = styled.button`
   display: none;
 
   @media screen and (min-width: 768px) {
-    background-image: url('./Modal/closeCross.svg');
+    background-image: url('images/icon/close_modal.svg');
     display: block;
     position: absolute;
     top: 24px;
@@ -57,8 +57,6 @@ export const CloseButton = styled.button`
     background-color: ${prop => prop.theme.palette.primary.main};
   }
 `;
-
-export const MobileModalClose = styled()``;
 
 export const Title = styled.p`
   margin: 0;
@@ -82,5 +80,5 @@ export const Title = styled.p`
   @media screen and (min-width: 1280px) {
     margin-left: 91px;
     margin-right: 90px;
-  } ;
+  }
 `;

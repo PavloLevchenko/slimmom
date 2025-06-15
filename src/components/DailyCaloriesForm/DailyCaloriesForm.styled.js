@@ -11,16 +11,16 @@ import {
 export const FormWrapper = styled.div`
   height: 100vh;
   padding-top: 32px;
-  padding-bottom: 41px;
+  margin-bottom: 41px;
 
   @media (min-width: 768px) {
     padding-top: 100px;
-    padding-bottom: 398px;
+    margin-bottom: 398px;
   }
 
   @media (min-width: 1280px) {
     padding-top: 137px;
-    padding-bottom: 110px;
+    margin-bottom: 110px;
   }
 `;
 
@@ -75,7 +75,6 @@ export const Label = styled(FormControlLabel)`
 
 export const Input = styled(TextField)`
   & input {
-    width: 240px;
     margin: 0;
     padding-top: 0;
     padding-bottom: 8px;
@@ -85,10 +84,13 @@ export const Input = styled(TextField)`
     line-height: 17px;
     letter-spacing: 0.04em;
     color: ${prop => prop.theme.palette.text.secondary};
+    fill: ${prop => prop.theme.palette.text.secondary};
   }
   & input:-webkit-autofill,
   & input:-webkit-autofill:focus {
-    transition: background-color 600000s 0s, color 600000s 0s;
+    transition:
+      background-color 600000s 0s,
+      color 600000s 0s;
   }
   & .MuiInput-underline:after {
     border-bottom-color: ${prop => prop.theme.palette.primary.main};

@@ -6,8 +6,8 @@ import {
   ButtonSecondary,
   LinkButton,
 } from 'components/Button/Button';
-import { register } from 'redux/services/operations';
-import { Form, ButtonBox, Input } from './registrationForm.styled';
+import { register } from 'reduxState/services/operations';
+import { Form, ButtonBox, Input } from './RegistrationForm.styled';
 import { useTranslation } from 'react-i18next';
 import { userRegisterSchema } from 'validation';
 import IconButton from '@mui/material/IconButton';
@@ -64,19 +64,21 @@ const RegisterForm = () => {
         label={t('Password')}
         variant="standard"
         type={showPassword ? 'text' : 'password'}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          ),
+        slotProps={{
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          },
         }}
         onChange={formik.handleChange}
         value={formik.values.password}

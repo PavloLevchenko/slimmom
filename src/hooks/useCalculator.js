@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getAllDiaryProduct, selectUserParams } from 'redux/services/selectors';
+import {
+  getAllDiaryProduct,
+  selectUserParams,
+} from 'reduxState/services/selectors';
 import { calculateCalories } from 'utils';
 
 export const useCalculator = () => {
