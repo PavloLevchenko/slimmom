@@ -6,7 +6,7 @@ import {
   ButtonSecondary,
   LinkButton,
 } from 'components/Button/Button';
-import { login } from '../../redux/services/operations';
+import { login } from '../../reduxState/services/operations';
 import { Form, ButtonBox, Input } from './LoginForm.styled';
 import { userLoginSchema } from 'validation';
 import { useTranslation } from 'react-i18next';
@@ -50,19 +50,21 @@ const LoginForm = () => {
         label={t('Passwords')}
         type={showPassword ? 'text' : 'password'}
         variant="standard"
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          ),
+        slotProps={{
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          },
         }}
         onChange={formik.handleChange}
         value={formik.values.password}

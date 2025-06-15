@@ -5,7 +5,7 @@ import { number, string, bool } from 'prop-types';
 import Box from '@mui/material/Box';
 import ListItemButton from '@mui/material/ListItemButton';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { selectUserParams } from 'redux/services/selectors';
+import { selectUserParams } from 'reduxState/services/selectors';
 import { useTranslation } from 'react-i18next';
 
 import List from '@mui/material/List';

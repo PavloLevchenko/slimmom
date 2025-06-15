@@ -6,16 +6,11 @@ const productsSlice = createSlice({
   initialState: {
     categories: [],
     bad: [],
-    loading: false,
+    calories: 0,
+    isLoading: false,
     error: '',
   },
   extraReducers: builder => {
-    builder.addCase(
-      isAnyOf(getProducts.pending, getProductsCategories.pending),
-      state => {
-        state.loading = true;
-      }
-    );
     builder.addCase(getProducts.fulfilled, (state, action) => {
       state.calories = action.payload.kCal;
       state.bad = action.payload.products;
@@ -23,6 +18,12 @@ const productsSlice = createSlice({
     builder.addCase(getProductsCategories.fulfilled, (state, action) => {
       state.categories = action.payload.titles;
     });
+    builder.addMatcher(
+      isAnyOf(getProducts.pending, getProductsCategories.pending),
+      state => {
+        state.isLoading = true;
+      }
+    );
     builder.addMatcher(
       isRejected(getProducts, getProductsCategories),
       (state, action) => {
@@ -35,7 +36,7 @@ const productsSlice = createSlice({
         action => action.type.endsWith('/fulfilled')
       ),
       state => {
-        state.loading = false;
+        state.isLoading = false;
       }
     );
   },

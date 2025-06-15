@@ -99,7 +99,8 @@ export const LeafsAuthImg = styled.img`
   }
 `;
 
-export const VectorImg = styled.img`
+export const VectorImg = styled.div`
+  fill: ${props => props.theme.palette.common.sideBar};
   @media screen and (max-width: 767.5px) {
     display: none;
   }

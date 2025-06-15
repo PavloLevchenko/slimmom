@@ -1,18 +1,20 @@
-import * as React from 'react';
+import { useEffect } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import 'dayjs/locale/en-gb';
 import 'dayjs/locale/de';
 import 'dayjs/locale/uk';
 import dayjs from 'dayjs';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import 'react-datetime/css/react-datetime.css';
-import { DiaryDate, Outline } from './DiaryDateCalendar.styled';
-import DateRangeIcon from '@mui/icons-material/DateRange';
+import { DiaryDate } from './DiaryDateCalendar.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllDiaryProduct, setDiaryDay } from 'redux/services/operations';
-import { selectIsRefreshing, getDiaryDay } from 'redux/services/selectors';
+import {
+  getAllDiaryProduct,
+  setDiaryDay,
+} from 'reduxState/services/operations';
+import { selectIsRefreshing, getDiaryDay } from 'reduxState/services/selectors';
 import { useTranslation } from 'react-i18next';
+import { DiaryDatePicker } from './DiaryDatePicker';
 
 export const DiaryDateCalendar = () => {
   const dispatch = useDispatch();
@@ -20,14 +22,12 @@ export const DiaryDateCalendar = () => {
 
   const handleChange = newValue => {
     const date = dayjs(newValue).format();
-
     dispatch(setDiaryDay(date));
-    dispatch(getAllDiaryProduct(date));
   };
   const day = useSelector(getDiaryDay);
   const isRefreshing = useSelector(selectIsRefreshing);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isRefreshing) {
       dispatch(getAllDiaryProduct(day));
     }
@@ -39,15 +39,7 @@ export const DiaryDateCalendar = () => {
       adapterLocale={i18n.language}
     >
       <DiaryDate>
-        <DesktopDatePicker
-          inputFormat="MMM DD YYYY"
-          disableMaskedInput
-          closeOnSelect={true}
-          value={day}
-          components={{ OpenPickerIcon: DateRangeIcon }}
-          onChange={handleChange}
-          renderInput={params => <Outline {...params} />}
-        />
+        <DiaryDatePicker day={dayjs(day)} handleChange={handleChange} />
       </DiaryDate>
     </LocalizationProvider>
   );

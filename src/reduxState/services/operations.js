@@ -8,7 +8,7 @@ axios.defaults.withCredentials = true;
 
 export const register = createAsyncThunk(
   '/api/auth/registration',
-  async (value, thunkAPI) => {
+  async (value, { rejectWithValue, extra }) => {
     try {
       await axios.post(`/api/auth/registration`, value);
       const { data } = await axios.post('/api/auth/login', {
@@ -17,8 +17,8 @@ export const register = createAsyncThunk(
       });
       return data;
     } catch (error) {
-      toast.error(thunkAPI.extra.i18n.t('Registration_error'));
-      return thunkAPI.rejectWithValue(error.message);
+      toast.error(extra.i18n.t('Registration_error'));
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -28,6 +28,7 @@ export const login = createAsyncThunk(
   async (value, { rejectWithValue, extra }) => {
     try {
       const { data } = await axios.post('/api/auth/login', value);
+      console.log('login');
       return data;
     } catch (error) {
       toast.error(extra.i18n.t('Sign_in_error'));
@@ -72,7 +73,7 @@ export const getProducts = createAsyncThunk(
       if (!data) {
         return rejectWithValue(status);
       }
-      data.message && toast.success(data.message);
+      data.message && toast.success(extra.i18n.t('Get_products_success'));
 
       return data;
     } catch (err) {
@@ -135,6 +136,7 @@ export const getDailyProducts = createAsyncThunk(
 );
 
 export const setUserParams = createAction('auth/save');
+export const setCookieConsent = createAction('auth/userCookieConsent');
 export const setDiaryDay = createAction('diary/day');
 
 export const deleteDiaryProduct = createAsyncThunk(
@@ -142,7 +144,6 @@ export const deleteDiaryProduct = createAsyncThunk(
   async (id, { rejectWithValue, extra }) => {
     try {
       await axios.delete(`/api/diary/${id}`);
-      toast(extra.i18n.t('Delete_product_from_diary_success'));
       return id;
     } catch (error) {
       toast(extra.i18n.t('Delete_product_from_diary_error'));
@@ -187,7 +188,7 @@ export const getNameProducts = createAsyncThunk(
       const { data } = await axios.get(`/api/products`, {
         params: { title: userQuery },
       });
-      data.message && toast.success(i18n.t('Parameters_calculated'));
+      data.message && toast.success(data.message);
       if (data.products.length === 0) {
         toast.info(i18n.t('Not_found_product'));
       }

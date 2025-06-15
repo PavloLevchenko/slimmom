@@ -7,8 +7,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   setUserParams,
   getProductsCategories,
-} from 'redux/services/operations';
-import { selectLoadStatus, selectUserParams } from 'redux/services/selectors';
+} from 'reduxState/services/operations';
+import {
+  selectLoadStatus,
+  selectUserParams,
+} from 'reduxState/services/selectors';
 import { userParamsSchema } from 'validation';
 import {
   Label,
@@ -23,7 +26,7 @@ import {
   Button,
   StyledModalBox,
 } from './DailyCaloriesForm.styled';
-import DailyCalorieIntake from 'components/DailyCalorieIntake/dailyCalorieIntake';
+import DailyCalorieIntake from 'components/DailyCalorieIntake/DailyCalorieIntake';
 import { useTranslation } from 'react-i18next';
 
 export const DailyCaloriesForm = ({ isModal = false }) => {

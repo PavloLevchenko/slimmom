@@ -11,12 +11,9 @@ import {
   AuthLink,
   ButtonWrapper,
 } from './Burger.styled';
-import { LangButton, ButtonContainer } from '../AuthNav/AuthNav.styled';
+import LangSwitcher from '../LangSwitcher';
 import { useAuth } from 'hooks/useAuth';
 import { useTranslation } from 'react-i18next';
-import i18n from './../../../translations/i18n';
-import '/node_modules/flag-icons/css/flag-icons.min.css';
-import 'react-dropdown/style.css';
 
 const Burger = () => {
   const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
@@ -27,32 +24,10 @@ const Burger = () => {
     setBurgerMenuOpen(!isBurgerMenuOpen);
   };
 
-  const handleOnclick = e => {
-    e.preventDefault();
-    i18n.changeLanguage(e.target.value);
-  };
-
   return (
     <>
       <ButtonWrapper>
-        <ButtonContainer>
-          <LangButton
-            value="en"
-            onClick={handleOnclick}
-            className="fi fi-gb"
-          ></LangButton>
-          <LangButton
-            value="de"
-            onClick={handleOnclick}
-            className="fi fi-de"
-          ></LangButton>
-          <LangButton
-            value="uk"
-            onClick={handleOnclick}
-            className="fi fi-ua"
-          ></LangButton>
-        </ButtonContainer>
-
+        <LangSwitcher />
         {!theme ? (
           <BurgerButton
             className={isBurgerMenuOpen ? 'active' : ''}

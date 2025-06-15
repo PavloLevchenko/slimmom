@@ -7,6 +7,7 @@ export const getToken = state => state.auth.token;
 export const getUserData = state => state.auth.user;
 export const selectUserParams = state => state.auth.userParams;
 export const selectIsRefreshing = state => state.auth.isRefreshing;
+export const selectConsentStatus = state => state.auth.cookieConsent;
 
 export const getGlobalUserData = createSelector(
   [getUserData, selectUserParams],
@@ -45,7 +46,8 @@ export const getAllGroupDiaryProduct = state => {
 };
 export const getAllDiaryProduct = state => state.diary.notes;
 export const getProductTitle = state => state.diary.selectTitle;
-export const getIsLoading = state => state.diary.IsLoading || state.products.loading;
+export const getIsLoading = state =>
+  state.diary.isLoading || state.products.isLoading;
 export const getDiaryDay = state => state.diary.day;
 
 export const selectBadCategories = state => state.products.categories;

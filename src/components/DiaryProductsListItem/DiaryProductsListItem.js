@@ -20,11 +20,13 @@ import { useSelector } from 'react-redux';
 import {
   getAllDiaryProduct,
   getAllGroupDiaryProduct,
-} from 'redux/services/selectors';
+  getIsLoading,
+} from 'reduxState/services/selectors';
 
 export default function DiaryProductsListItem() {
   const notes = useSelector(getAllDiaryProduct);
   const notesGroup = useSelector(getAllGroupDiaryProduct);
+  const isLoading = useSelector(getIsLoading);
   const [open, setOpen] = useState(false);
   const [idProduct, setIdProduct] = useState();
   const [group, setGrouped] = useState(false);
@@ -53,7 +55,7 @@ export default function DiaryProductsListItem() {
           label={t('GroupProducts')}
         />
       </ProductCheckboxGroup>
-      <List>
+      <List disabled={isLoading}>
         {dailyProducts.map((e, i, ar) => {
           return (
             <ListItems key={e._id}>

@@ -1,7 +1,7 @@
 import { ButtonBox } from 'components/DiaryModalList/DiaryModalList.styled';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { deleteDiaryProduct } from 'redux/services/operations';
+import { deleteDiaryProduct } from 'reduxState/services/operations';
 import {
   ModalDiaryStyled,
   ModalTextDiary,

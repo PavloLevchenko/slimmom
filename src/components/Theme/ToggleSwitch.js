@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { FormGroup, FormControlLabel, Switch } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { toggleTheme } from '../../redux/services/themeSlice';
+import { toggleTheme } from '../../reduxState/services/themeSlice';
 
 export const ToggleSwitch = () => {
   const theme = useSelector(state => state.theme.darkTheme);

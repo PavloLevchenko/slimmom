@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { Backdrop, Button } from '@mui/material';
 
-export const Backdrop = styled.div`
+export const AddBackdrop = styled(Backdrop)`
   position: absolute;
   z-index: 1;
   background: ${prop => prop.theme.palette.background.paper};
@@ -10,13 +11,12 @@ export const Backdrop = styled.div`
   height: 100%;
 `;
 
-export const Btn = styled.button`
+export const Btn = styled(Button)`
   align-self: center;
   width: 176px;
   height: 44px;
   border-radius: 7px;
   border: none;
-  background: ${prop => prop.theme.palette.primary.main};
   box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
   border-radius: 30px;
   font-family: 'Verdana';
@@ -27,4 +27,14 @@ export const Btn = styled.button`
   text-align: center;
   letter-spacing: 0.04em;
   color: ${prop => prop.theme.palette.common.white};
+`;
+
+export const MobileModalClose = styled(Btn)`
+  position: absolute;
+  top: 84px;
+  right: 40px;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `;
